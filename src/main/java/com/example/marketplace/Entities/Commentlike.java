@@ -3,7 +3,7 @@ package com.example.marketplace.Entities;
 import javax.persistence.*;
 
 @Entity
-
+//forum
 public class Commentlike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
