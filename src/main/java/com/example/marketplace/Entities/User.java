@@ -1,15 +1,24 @@
 package com.example.marketplace.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -29,8 +38,8 @@ public class User {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-    private Set<Order> order;
+   /* @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private Set<Order> order;*/
 
     @OneToOne
     private Cart cart;

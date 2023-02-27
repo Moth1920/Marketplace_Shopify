@@ -1,12 +1,22 @@
 package com.example.marketplace.Entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Set;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Order {
+public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -52,8 +62,8 @@ public class Order {
     private Facture facture;
 
     // relation avec User Many Orders to one user
-    @ManyToOne
-    User user;
+   /* @ManyToOne
+    User user;*/
 
 
 }
