@@ -29,6 +29,9 @@ public class User implements Serializable {
     private Integer numdetelUser;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Produit> produits;
     @OneToMany(mappedBy ="sender")
     @JsonIgnore
     private List<Chat>sentMessages;

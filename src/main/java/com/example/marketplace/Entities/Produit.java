@@ -31,5 +31,7 @@ public class Produit implements Serializable {
 
     @OneToOne
     private OrderLine orderLine;
+    @ManyToOne
+    private User user;
 
 }
