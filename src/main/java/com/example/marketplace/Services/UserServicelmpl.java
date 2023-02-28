@@ -2,11 +2,9 @@ package com.example.marketplace.Services;
 
 import com.example.marketplace.Entities.User;
 import com.example.marketplace.Repositories.UserRepository;
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 
-import java.util.ListIterator;
+import java.util.List;
 
 
 public class UserServicelmpl implements UserService {
@@ -20,12 +18,12 @@ public class UserServicelmpl implements UserService {
 
     @Override
     public User getUser(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
     public User updateUser(Long id, User user) {
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         existingUser.setNomUser(user.getNomUser());
         existingUser.setPasswordUser(user.getPasswordUser());
         existingUser.setEmailUser(user.getEmailUser());
@@ -36,17 +34,17 @@ public class UserServicelmpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        User user = getUser(id);
         userRepository.delete(user);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return null;
     }
-    //jjjj
-}
 
 }
+
+
 
 
