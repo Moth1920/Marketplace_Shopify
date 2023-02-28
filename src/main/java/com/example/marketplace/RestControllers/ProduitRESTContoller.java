@@ -54,11 +54,11 @@ public class ProduitRESTContoller {
         return produitService.updateCategorie(categorie);
     }
 
-    @DeleteMapping("/delete/{id}")
-    @ResponseBody
-    public void deleteProduit(@PathVariable("id") Long id)
+    @DeleteMapping("/delete/{idProduit}")
+
+    public void deleteProduit(@PathVariable("idProduit") Long idProduit)
     {
-        produitService.deleteProduitById(id);
+        produitService.deleteProduitById(idProduit);
     }
     @GetMapping(value="getAllProduits")
     public List<Produit> findAllProduits(){
@@ -67,5 +67,12 @@ public class ProduitRESTContoller {
     @GetMapping(value="getAllCategories")
     public List<Categorie> findAllCategories(){
         return produitServiceImpl.findAllCategories();
+    }
+    @PostMapping("/addproducttocat/{idCategorie}")
+    @ResponseBody
+    public void assignProductToCategorie(@RequestBody Produit produit,@PathVariable("idCategorie") Long idCategorie )
+    {
+        produitService.affectprodtocat(produit, idCategorie);
     }}
+
 
