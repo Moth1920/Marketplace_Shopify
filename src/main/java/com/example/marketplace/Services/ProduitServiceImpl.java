@@ -14,7 +14,13 @@ public class ProduitServiceImpl implements ProduitService{
     ProduitRepository produitRepository;
     @Autowired
     CategorieRepository categorieRepository;
+    @Override
+    public void affectprodtocat(Produit produit,Long idCategorie) {
+        Categorie categorie = categorieRepository.findById(idCategorie).orElse(null);
+        produit.setCategorie(categorie);
 
+        produitRepository.save(produit);
+    }
     @Override
     public List<Produit> findAllProduits(){
         return (List<Produit>) produitRepository.findAll();
@@ -55,8 +61,8 @@ public class ProduitServiceImpl implements ProduitService{
     }
 
     @Override
-    public void deleteProduitById(Long id) {
-        produitRepository.deleteById(id);
+    public void deleteProduitById(Long idProduit) {
+        produitRepository.deleteById(idProduit);
     }
 
 

@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProduitService {
 
+    void affectprodtocat(Produit produit, Long idCategorie);
+
     List<Produit> findAllProduits();
     List<Categorie> findAllCategories();
 
@@ -23,6 +25,6 @@ public interface ProduitService {
 
     void deleteProduit(Produit p);
 
-    void deleteProduitById(Long id);
+    void deleteProduitById(Long idProduit);
 
 }
