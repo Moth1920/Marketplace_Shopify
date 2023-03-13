@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <title><i style="color:darkcyan;">Product added</i></title>
+    <style>
+        body {
+            background-color: blue;
+            font-family:Arial ;
+        }
+        .center {
+            text-align: center;
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-
+<div class="center">
+    <img src="Images/Logo.jpg" alt="Logo" width="500px">
+</div>
+<p><i style="color: darkcyan; font-family: Georgia; font-size: 25px;text-align: center; "> Hello,a new product has been added in our store <b>SHOPIFY</b></i></p>
+<p class="bold" style="border-style: solid;border-color: teal; background-color: darkcyan;color: white;font-family: Georgia; border-width: thick;" th:text="'Category name: ' + ${nomCat}"></p>
+<p style="color:darkcyan;font-family: Georgia;font-size: 20px;">It may attract your attention, you can check our website right now and don't miss the news.</p>
+<p style="color:darkcyan; text-align: right;font-family: Georgia;" class="bold" th:text="${#temporals.format(#temporals.createNow(), 'dd MMM yyyy')}"></p>
 </body>
 </html>
