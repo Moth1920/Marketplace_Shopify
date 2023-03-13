@@ -24,6 +24,7 @@ public class Produit implements Serializable {
     private String nomProduit;
     private Float prixProduit;
     private int quantity;
+
     private Date dateCreation;
     @ManyToOne
     @JsonIgnore
