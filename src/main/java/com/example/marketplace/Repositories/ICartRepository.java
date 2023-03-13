@@ -1,4 +1,7 @@
 package com.example.marketplace.Repositories;
 
-public interface ICartRepository {
+import com.example.marketplace.Entities.Cart;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ICartRepository extends JpaRepository<Cart,Long> {
 }

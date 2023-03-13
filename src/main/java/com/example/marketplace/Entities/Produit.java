@@ -29,7 +29,7 @@ public class Produit implements Serializable {
     @OneToMany (mappedBy = "productlike" ,cascade = CascadeType.ALL)
     private List<Productlike> Likes;
 
-    @OneToOne
+    @OneToOne(mappedBy="produit")
     private OrderLine orderLine;
     @ManyToOne
     private User user;

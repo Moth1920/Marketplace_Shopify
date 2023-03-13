@@ -1,5 +1,6 @@
 package com.example.marketplace.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,28 +20,30 @@ public class OrderLine implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long idOrderLine;
-    private Long productreference;
+    private Float prixOrderLine;
 
     private Integer quantity;
 
 
+    //  Difference with the main Project
+    private Long orderLineTotal;
+    @Enumerated(EnumType.STRING)
+    private OrderLineStatus orderLineStatus=OrderLineStatus.activated;
 
-    private Long orderTotal;
+   @ManyToOne
+    @JsonIgnore
+    Commande commande;
 
-    //  @ManyToOne
-    // Order order;
+    @ManyToOne
+    @JsonIgnore
+    Cart cart;
 
-    // @ManyToOne
-    // Cart cart;
 
     //relation between orderLine and Product One to One
-    @OneToOne(mappedBy="orderLine")
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy="orderlines")
+    //private Set<Produit> produits;
+    @OneToOne
     private Produit produit;
-
-//Dans la classe Product
-    //@OneToOne
-//  private OrderLine orderLine;
 
 
 }
-
