@@ -1,5 +1,6 @@
 package com.example.marketplace.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,16 +23,22 @@ public class Produit implements Serializable {
     private Long idProduit;
     private String nomProduit;
     private Float prixProduit;
+    private int quantity;
+
     private Date dateCreation;
     @ManyToOne
+    @JsonIgnore
     private Categorie categorie;
 
     @OneToMany (mappedBy = "productlike" ,cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Productlike> Likes;
 
     @OneToOne(mappedBy="produit")
+    @JsonIgnore
     private OrderLine orderLine;
     @ManyToOne
+    @JsonIgnore
     private User user;
 
 }
