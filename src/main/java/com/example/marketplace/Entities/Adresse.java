@@ -14,6 +14,7 @@ import java.util.List;
 public class Adresse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idA;
     @Column(name="adreese1")
     private String adresse1;
    /* @Column(name="adreese2")
