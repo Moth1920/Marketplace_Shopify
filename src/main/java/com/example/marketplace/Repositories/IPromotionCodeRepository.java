@@ -1,4 +1,7 @@
 package com.example.marketplace.Repositories;
 
-public interface IPromotionCodeRepository {
+import com.example.marketplace.Entities.PromotionCode;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IPromotionCodeRepository extends JpaRepository<PromotionCode,Long> {
 }

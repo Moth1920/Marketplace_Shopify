@@ -1,4 +1,4 @@
-package com.example.marketplace.Repositories;
-
-public interface IOrderRepository {
-}
+//package com.example.marketplace.Repositories;
+//
+//public interface IOrderRepository {
+//}

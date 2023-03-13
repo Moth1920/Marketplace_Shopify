@@ -26,9 +26,10 @@ public class PromotionCode implements Serializable {
     private Date startDate;
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    @Enumerated(EnumType.STRING)
     private PromoStatus promoStatus;
     //promotion code can be applied to many  carts
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "promotionCode")
-    private Set<Cart> carts;
+    private Set<Cart> carts ;
 }
