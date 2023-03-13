@@ -30,7 +30,7 @@ public class OrderLine implements Serializable {
     @Enumerated(EnumType.STRING)
     private OrderLineStatus orderLineStatus=OrderLineStatus.activated;
 
-    @ManyToOne
+   @ManyToOne
     @JsonIgnore
     Commande commande;
 
