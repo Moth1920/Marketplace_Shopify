@@ -3,24 +3,27 @@ package com.example.marketplace.Entities;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@Table(name = "utilisateur")
 @NoArgsConstructor
 @Entity
-
-public class User implements Serializable {
+@ToString
+@Builder
+public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -35,6 +38,45 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Produit> produits;
 
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        list.add(new SimpleGrantedAuthority(role.name()));
+        return list;
+    }
+
+
+    @JsonIgnore
+    public String getPassword() {
+        return passwordUser;
+    }
+
+
+    @JsonIgnore
+    public String getUsername() {
+        return emailUser;
+    }
+
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
+    }
 
    /* @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     private Set<Order> order;*/
