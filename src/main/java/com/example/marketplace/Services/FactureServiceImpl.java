@@ -2,8 +2,9 @@ package com.example.marketplace.Services;
 
 import com.example.marketplace.Entities.*;
 import com.example.marketplace.Repositories.*;
-
+import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
@@ -12,12 +13,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.Document;
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.*;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -47,7 +45,7 @@ public class FactureServiceImpl implements IFactureService {
 
         float totalPrice = 0.0f;
         for (OrderLine orderLine : commande.get().getOrderLines()) {
-            totalPrice += orderLine.getOrderTotal();
+            totalPrice += orderLine.getOrderLineTotal();
         }
         facture.setPrix(totalPrice);
         facture.setDateFacture(new Date());
