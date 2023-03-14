@@ -7,6 +7,9 @@ import com.example.marketplace.Repositories.ProduitRepository;
 import com.example.marketplace.Services.ProduitService;
 import com.example.marketplace.Services.ProduitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +25,7 @@ public class ProduitRESTContoller {
     @Autowired
     ProduitServiceImpl produitServiceImpl;
 
-
+    Pageable pageable = PageRequest.of(0,2);
 
 
 
@@ -62,9 +65,10 @@ public class ProduitRESTContoller {
     {
         produitService.deleteProduitById(idProduit);
     }
-    @GetMapping(value="getAllProduits")
-    public List<Produit> findAllProduits(){
-        return produitServiceImpl.findAllProduits();
+    @GetMapping(value="getAllProduits/{offset}/{pageSize}")
+    public ResponseEntity<Page<Produit>> findAllProduits(@PathVariable int offset,@PathVariable int pageSize){
+        Page<Produit> products = produitService.findAllProduits(offset, pageSize);
+        return ResponseEntity.ok().body(products);
     }
     @GetMapping(value="getAllCategories")
     public List<Categorie> findAllCategories(){
