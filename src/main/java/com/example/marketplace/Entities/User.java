@@ -71,6 +71,9 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostCommentLike> postCommentLikes = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private Set<Commande> commande;
 
 }
 

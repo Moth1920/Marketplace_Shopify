@@ -40,6 +40,10 @@ public class Commande implements Serializable {
     @JsonIgnore
     private Set<OrderLine> orderLines;
 
+    @ManyToOne
+    @JsonIgnore
+    User user;
+
 
 
 
