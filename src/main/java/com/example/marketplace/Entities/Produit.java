@@ -30,9 +30,6 @@ public class Produit implements Serializable {
     @JsonIgnore
     private Categorie categorie;
 
-    @OneToMany (mappedBy = "productlike" ,cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Productlike> Likes;
 
     @OneToOne(mappedBy="produit")
     @JsonIgnore
