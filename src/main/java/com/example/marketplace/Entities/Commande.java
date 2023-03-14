@@ -1,5 +1,6 @@
 package com.example.marketplace.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,10 +32,12 @@ public class Commande implements Serializable {
 
 
     @OneToOne
+    @JsonIgnore
     private Facture facture;
     @OneToOne
     private Cart cart;
     @OneToMany(cascade = CascadeType.ALL, mappedBy="commande")
+    @JsonIgnore
     private Set<OrderLine> orderLines;
 
 
