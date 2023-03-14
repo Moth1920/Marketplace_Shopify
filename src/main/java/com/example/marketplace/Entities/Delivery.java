@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,6 +23,9 @@ public class Delivery implements Serializable {
     private Date datedelivery;
     @OneToOne(cascade = CascadeType.PERSIST)
     private Adresse adresse;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "delivery_id")
+    private List<Facture> factures;
 }
 
 
