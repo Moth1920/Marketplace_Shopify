@@ -1,6 +1,8 @@
 package com.example.marketplace.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,13 +34,6 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Produit> produits;
-    @OneToMany(mappedBy ="sender")
-    @JsonIgnore
-    private List<Chat>sentMessages;
-    @OneToMany(mappedBy ="receiver")
-    @JsonIgnore
-    private List<Chat>receivedMessage;
-
 
 
    /* @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
@@ -51,4 +46,31 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     private Set<Reclamation> reclamations;
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY,
+            // cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "postId")
+    private List<Post> posts = new ArrayList<>();
+
+    // TODO
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+            // orphanRemoval = true
+    )
+    @JsonIgnore
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "postCommentId")
+    private List<PostComment> postComments = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostLike> postLikes = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostCommentLike> postCommentLikes = new ArrayList<>();
+
 }
+
