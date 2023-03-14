@@ -2,11 +2,10 @@ package com.example.marketplace.RestControllers;
 
 import com.example.marketplace.Entities.Facture;
 import com.example.marketplace.Entities.Commande;
-import com.example.marketplace.Entities.OrderLine;
 import com.example.marketplace.Entities.User;
 import com.example.marketplace.Repositories.ICommandeRepository;
 import com.example.marketplace.Repositories.UserRepository;
-import com.example.marketplace.Services.CommandeServiceImpl;
+
 import com.example.marketplace.Services.IFactureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
