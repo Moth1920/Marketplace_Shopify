@@ -9,6 +9,9 @@ import com.example.marketplace.Repositories.CategorieRepository;
 import com.example.marketplace.Repositories.ProduitRepository;
 import com.example.marketplace.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import org.springframework.data.domain.Pageable;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -24,7 +28,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class ProduitServiceImpl implements ProduitService{
+public class ProduitServiceImpl  implements ProduitService {
     @Autowired
     ProduitRepository produitRepository;
     @Autowired
@@ -35,6 +39,7 @@ public class ProduitServiceImpl implements ProduitService{
     JavaMailSender javaMailSender;
     @Autowired
     TemplateEngine  templateEngine;
+
     @Override
     public void affectprodtocat(Produit p,Long idCategorie, Long idUser) {
         Categorie c = categorieRepository.findById(idCategorie).orElse(null);
@@ -87,8 +92,9 @@ public class ProduitServiceImpl implements ProduitService{
         categorieRepository.save(categorie);
     }
     @Override
-    public List<Produit> findAllProduits(){
-        return (List<Produit>) produitRepository.findAll();
+    public Page<Produit> findAllProduits(int offset, int pageSize){
+        Page<Produit> products = produitRepository.findAll(PageRequest.of(offset,pageSize));
+        return products;
     }
 
     @Override
